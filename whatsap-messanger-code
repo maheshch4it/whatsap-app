@@ -1,0 +1,66 @@
+# Messenger App
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Message {
+    private String sender;
+    private String content;
+
+    public Message(String sender, String content) {
+        this.sender = sender;
+        this.content = content;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getContent() {
+        return content;
+    }
+}
+
+class Chat {
+    private List<Message> messages;
+
+    public Chat() {
+        messages = new ArrayList<>();
+    }
+
+    public void sendMessage(String sender, String content) {
+        messages.add(new Message(sender, content));
+    }
+
+    public void displayMessages() {
+        for (Message message : messages) {
+            System.out.println(message.getSender() + ": " + message.getContent());
+        }
+    }
+}
+
+public class MessengerApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Chat chat = new Chat();
+        String sender;
+
+        System.out.print("Enter your name: ");
+        sender = scanner.nextLine();
+
+        String content;
+        while (true) {
+            System.out.print("Enter message (type 'exit' to quit): ");
+            content = scanner.nextLine();
+            if (content.equalsIgnoreCase("exit")) {
+                break;
+            }
+            chat.sendMessage(sender, content);
+            chat.displayMessages();
+        }
+
+        scanner.close();
+    }
+}
+
